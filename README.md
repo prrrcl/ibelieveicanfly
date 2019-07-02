@@ -1,7 +1,9 @@
 # I Believe I Can Fly
 
 ## Description
-It's a videogame based 
+“I Believe I Can Fly” is based in the famous Flappy Bird game. But designed like “I believe I can fly basket fail” meme. The main character is the same as the one in the meme. 
+
+As in the original game, the main character try to fly as long possible. Avoiding the obstacles in this case basketball basket.  
 
 ## MVP (DOM - CANVAS)
 1. Create files
