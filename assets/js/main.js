@@ -29,6 +29,11 @@ function main(){
       </section>
     `);
     var canvas = gameScreen.querySelector('#game-canvas');
+    var game = new Game(canvas);
+    game.gameOverCallback(createGameOverScreen);
+
+    game.start();
+    
   }
 
 
