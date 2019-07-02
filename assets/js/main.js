@@ -31,6 +31,7 @@ function main(){
     var canvas = gameScreen.querySelector('#game-canvas');
   }
 
+
   function createGameOverScreen(){
     var gameOverScreen = buildDom(`
       <section>
