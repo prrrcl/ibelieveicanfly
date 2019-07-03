@@ -8,7 +8,7 @@ function Player(canvas) {
   this.x = 20;
   this.y = (this.canvas.height / 2) - this.height / 2;
   this.lives = 1;
-  this.velocity = 3;
+  this.velocity = 20;
   this.direction = 0;
   this.color = 'blue';
 }
@@ -23,4 +23,11 @@ Player.prototype.draw = function(){
 Player.prototype.setDirection = function(dir){
   this.direction = dir;
   this.move();
+}
+Player.prototype.checkScreen = function(){
+  if(this.y < 0){
+    this.y = 0;
+  }else if(this.y > this.canvas.height - this.height / 2){
+    this.y = this.canvas.height - this.height;
+  }
 }
