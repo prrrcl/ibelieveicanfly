@@ -33,7 +33,13 @@ function main(){
     game.gameOverCallback(createGameOverScreen);
 
     game.start();
-    
+    document.addEventListener('keydown', function(event){
+      if(event.key === 'ArrowDown'){
+        game.player.setDirection(1);
+      }else if(event.key === 'ArrowUp'){
+        game.player.setDirection(-1);
+      }
+    });
   }
 
 
