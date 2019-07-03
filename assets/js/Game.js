@@ -15,7 +15,7 @@ Game.prototype.start = function () {
   this.player = new Player(this.canvas);
   var loop = () => {
     this.cont++;
-    if (this.cont % 80 === 0) {
+    if (this.cont % 100 === 0) {
       this.generateObstacles();
       this.deleteObstacles(this.obstacles);
     }

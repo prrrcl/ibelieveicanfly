@@ -35,11 +35,14 @@ function main(){
 
     game.start();
     document.addEventListener('keydown', function(event){
-      if(event.key === 'ArrowDown'){
-        game.player.setDirection(1);
-      }else if(event.key === 'ArrowUp'){
+       if(event.keyCode === 32){
         game.player.setDirection(-1);
       }
+      document.addEventListener('keyup', function(event){
+        if(event.keyCode === 32){
+          game.player.setDirection(1);
+        }
+      })
     });
   }
 
