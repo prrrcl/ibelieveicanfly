@@ -27,6 +27,7 @@ Game.prototype.start = function () {
     this.draw();
     this.checkCollisions();
     this.scoreUpdate();
+    this.saveScore(this.score);
     if (!this.isGameOver) {
       var frameID = requestAnimationFrame(loop);
     } else {
@@ -62,11 +63,12 @@ Game.prototype.checkCollisions = function () {
     if (rightLeft && leftRight && bottomTop && topBottom) {
       this.obstacles.splice(index, 1);
       this.player.lives--;
-      if (this.player.lives === 0) {
-        this.isGameOver = true;
-      }
+
     }
   })
+  if (this.player.lives === 0) {
+    this.isGameOver = true;
+  }
 }
 Game.prototype.gameOverCallback = function (callback) {
   this.onGameOver = callback;
@@ -89,7 +91,10 @@ Game.prototype.deleteObstacles = function (obstacles) {
     });
   }
 }
-Game.prototype.scoreUpdate = function(){
+Game.prototype.scoreUpdate = function () {
   var p = document.querySelector('.score');
   p.innerHTML = 'Score: ' + this.score;
+}
+Game.prototype.saveScore = function (score) {
+  localStorage.setItem('score', score);
 }

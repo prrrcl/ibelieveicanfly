@@ -19,7 +19,7 @@ function main(){
     <article>
       <p>The man just jump from elastic bed, and he want to make a mate, but... I think he can't do it...</p>
       <p>Anyway, you can help him with "Space" key.</p>
-      <p>The man, dropdown by default. You must "give the power of fly" with "space" key.</p>
+      <p>The man, dropdown by default. You must "give the power of fly" with "space" key if you don't want die with the floor... :)</p>
       <button>Let's try</button>
     </article>
   </section>
@@ -56,9 +56,13 @@ function main(){
     var gameOverScreen = buildDom(`
       <section>
         <h2>GAME OVER </h2>
+        <p class="score"></p>
+
         <button>Restart</button>
       </section>
     `);
+    var scoreShow = document.querySelector('.score');
+    scoreShow.innerHTML ='<h4>Great!!</h4> <p>your Score:</p> <h2>' + localStorage.getItem('score') + '</h2>';
     var restartButton = gameOverScreen.querySelector('button');
     restartButton.addEventListener('click', createGameScreen);
   }

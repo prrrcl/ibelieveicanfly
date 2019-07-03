@@ -8,7 +8,7 @@ function Player(canvas) {
   this.x = 100;
   this.y = (this.canvas.height / 2) - this.height / 2;
   this.lives = 1;
-  this.velocity = 3;
+  this.velocity = 4;
   this.direction = 1;
   this.color = 'blue';
 }
@@ -27,8 +27,11 @@ Player.prototype.setDirection = function (dir) {
 Player.prototype.checkScreen = function () {
   if (this.y < 0) {
     this.y = 0;
+    
   } else if (this.y > this.canvas.height - this.height / 2) {
     this.y = this.canvas.height - this.height;
+    this.direction = 0;
+    this.lives--;
   }
 }
 
