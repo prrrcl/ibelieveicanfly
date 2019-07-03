@@ -40,6 +40,7 @@ Game.prototype.update = function () {
     obstacle.move();
   });
   this.player.checkScreen();
+  this.player.move();
 }
 Game.prototype.clear = function () {
   this.ctxCanvas.clearRect(0, 0, this.canvas.width, this.canvas.height)
@@ -75,12 +76,9 @@ Game.prototype.generateObstacles = function () {
   if (randomHeight > 400) {
     randomHeight = 400;
   }
-  console.log(randomHeight);
-  console.log('height canvas: ' + this.canvas.height);
   var newObstacle = new Obstacle(this.canvas, randomHeight, 0);
-  var newObstacle2 = new Obstacle(this.canvas, this.canvas.height, randomHeight + 50)
+  var newObstacle2 = new Obstacle(this.canvas, this.canvas.height, randomHeight + 80)
   this.obstacles.push(newObstacle, newObstacle2);
-  console.log(this.obstacles);
 }
 Game.prototype.deleteObstacles = function (obstacles) {
   if (obstacles.length > 0) {
