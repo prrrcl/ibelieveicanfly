@@ -11,12 +11,18 @@ function main(){
 
   function createStartPage(){
     var startScreen = buildDom(`
-      <section>
-        <header>
-          <h1>IBelieveICanFly &reg; The Game.</h1>
-        </header>
-        <button>Start</button>
-      </section>
+    <section>
+    <header>
+    <h2>Instructions</h2>
+    <h4>Do you want to play this game? It's so easy!!!</h4>
+    </header>
+    <article>
+      <p>The man just jump from elastic bed, and he want to make a mate, but... I think he can't do it...</p>
+      <p>Anyway, you can help him with "Space" key.</p>
+      <p>The man, dropdown by default. You must "give the power of fly" with "space" key.</p>
+      <button>Let's try</button>
+    </article>
+  </section>
     `);
     var startButton = startScreen.querySelector('button');
     startButton.addEventListener('click', createGameScreen);
@@ -45,7 +51,6 @@ function main(){
       })
     });
   }
-
 
   function createGameOverScreen(){
     var gameOverScreen = buildDom(`
