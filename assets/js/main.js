@@ -26,6 +26,7 @@ function main(){
     var gameScreen = buildDom(`
       <section>
         <canvas id="game-canvas" width="700" height="500"></canvas>
+        <p class="score"></p>
       </section>
     `);
     var canvas = gameScreen.querySelector('#game-canvas');

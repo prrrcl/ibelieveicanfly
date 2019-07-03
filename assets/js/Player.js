@@ -13,20 +13,23 @@ function Player(canvas) {
   this.color = 'blue';
 }
 
-Player.prototype.move = function (){
+Player.prototype.move = function () {
   this.y = this.y + this.direction * this.velocity;
 }
-Player.prototype.draw = function(){
+Player.prototype.draw = function () {
   this.ctxCanvas.fillStyle = this.color;
   this.ctxCanvas.fillRect(this.x, this.y, this.width, this.height);
 }
-Player.prototype.setDirection = function(dir){
+Player.prototype.setDirection = function (dir) {
   this.direction = dir;
 }
-Player.prototype.checkScreen = function(){
-  if(this.y < 0){
+Player.prototype.checkScreen = function () {
+  if (this.y < 0) {
     this.y = 0;
-  }else if(this.y > this.canvas.height - this.height / 2){
+  } else if (this.y > this.canvas.height - this.height / 2) {
     this.y = this.canvas.height - this.height;
   }
+}
+Player.prototype.dropDown = function () {
+
 }

@@ -8,32 +8,32 @@ function Game(canvas) {
   this.ctxCanvas = this.canvas.getContext('2d');
   this.onGameOver = null;
   this.cont = 0;
+  this.score = 0;
 }
 
 Game.prototype.start = function () {
   this.player = new Player(this.canvas);
   var loop = () => {
     this.cont++;
-    if (this.cont === 80) {
+    if (this.cont % 80 === 0) {
       this.generateObstacles();
       this.deleteObstacles(this.obstacles);
-      this.cont = 0;
+    }
+    if (this.cont % 60 === 0) {
+      this.score++;
     }
     this.update();
     this.clear();
     this.draw();
     this.checkCollisions();
-
+    this.scoreUpdate();
     if (!this.isGameOver) {
       var frameID = requestAnimationFrame(loop);
     } else {
       this.onGameOver();
     }
-
-
   }
   loop();
-
 }
 Game.prototype.update = function () {
   this.obstacles.forEach(function (obstacle) {
@@ -88,5 +88,8 @@ Game.prototype.deleteObstacles = function (obstacles) {
       }
     });
   }
-
+}
+Game.prototype.scoreUpdate = function(){
+  var p = document.querySelector('.score');
+  p.innerHTML = 'Score: ' + this.score;
 }
