@@ -1,69 +1,94 @@
 'use strict';
 
-function Game(canvas){
+function Game(canvas) {
   this.player = null;
   this.obstacles = [];
   this.isGameOver = false;
   this.canvas = canvas;
   this.ctxCanvas = this.canvas.getContext('2d');
   this.onGameOver = null;
+  this.cont = 0;
 }
 
-Game.prototype.start = function(){
-  this.player = new Player (this.canvas);
+Game.prototype.start = function () {
+  this.player = new Player(this.canvas);
   var loop = () => {
-    if(Math.random() > 0.99){
-      var randomHeight = Math.random() * this.canvas.randomHeight - 10;
-      var newObstacle = new Obstacle(this.canvas, randomHeight);
-      this.obstacles.push(newObstacle);
+    this.cont++;
+    if (this.cont === 80) {
+      this.generateObstacles();
+      this.deleteObstacles(this.obstacles);
+      this.cont = 0;
     }
     this.update();
     this.clear();
     this.draw();
     this.checkCollisions();
-    
-    if(!this.isGameOver){
+
+    if (!this.isGameOver) {
       var frameID = requestAnimationFrame(loop);
-    }else{
+    } else {
       this.onGameOver();
     }
-    
-   
+
+
   }
   loop();
 
 }
-Game.prototype.update = function(){
-  this.obstacles.forEach(function(obstacle){
+Game.prototype.update = function () {
+  this.obstacles.forEach(function (obstacle) {
     obstacle.move();
-  })
+  });
+  this.player.checkScreen();
 }
-Game.prototype.clear = function(){
-  this.ctxCanvas.clearRect(0,0,this.canvas.width, this.canvas.randomHeight)
+Game.prototype.clear = function () {
+  this.ctxCanvas.clearRect(0, 0, this.canvas.width, this.canvas.height)
 }
 
-Game.prototype.draw = function(){
+Game.prototype.draw = function () {
   this.player.draw();
-  this.obstacles.forEach(function(obstacle){
+  this.obstacles.forEach(function (obstacle) {
     obstacle.draw();
   })
 }
-Game.prototype.checkCollisions = function(){
-  this.obstacles.forEach((obstacle, index) =>{
+Game.prototype.checkCollisions = function () {
+  this.obstacles.forEach((obstacle, index) => {
     var rightLeft = this.player.x + this.player.width >= obstacle.x;
     var leftRight = this.player.x <= obstacle.x + obstacle.width;
     var bottomTop = this.player.y + this.player.height >= obstacle.y;
     var topBottom = this.player.y <= obstacle.y + obstacle.height;
-    
-    if(rightLeft && leftRight && bottomTop && topBottom){
-      this.enemies.splice(index,1);
+
+    if (rightLeft && leftRight && bottomTop && topBottom) {
+      this.obstacles.splice(index, 1);
       this.player.lives--;
-      if(this.player.lives === 0){
+      if (this.player.lives === 0) {
         this.isGameOver = true;
       }
     }
   })
 }
-Game.prototype.gameOverCallback = function(callback){
+Game.prototype.gameOverCallback = function (callback) {
   this.onGameOver = callback;
+}
+Game.prototype.generateObstacles = function () {
+  var randomHeight = Math.floor(Math.random() * this.canvas.height);
+  if (randomHeight > 400) {
+    randomHeight = 400;
+  }
+  console.log(randomHeight);
+  console.log('height canvas: ' + this.canvas.height);
+  var newObstacle = new Obstacle(this.canvas, randomHeight, 0);
+  var newObstacle2 = new Obstacle(this.canvas, this.canvas.height, randomHeight + 50)
+  this.obstacles.push(newObstacle, newObstacle2);
+  console.log(this.obstacles);
+}
+Game.prototype.deleteObstacles = function (obstacles) {
+  if (obstacles.length > 0) {
+    obstacles.forEach(function (obstacle) {
+      if (obstacle.x < 0) {
+        obstacles.shift();
+      }
+    });
+  }
+
 }
