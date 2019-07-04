@@ -9,9 +9,11 @@ function Game(canvas) {
   this.onGameOver = null;
   this.cont = 0;
   this.score = 0;
+  this.bso = new Audio('./assets/ibelieveicanfly.mp3')
 }
 
 Game.prototype.start = function () {
+  this.bso.play();
   this.player = new Player(this.canvas);
   this.background = new Background(this.canvas);
 
@@ -72,6 +74,7 @@ Game.prototype.checkCollisions = function () {
   })
   if (this.player.lives === 0) {
     this.isGameOver = true;
+    this.bso.pause();
   }
 }
 Game.prototype.gameOverCallback = function (callback) {

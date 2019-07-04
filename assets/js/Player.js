@@ -3,8 +3,8 @@
 function Player(canvas) {
   this.canvas = canvas;
   this.ctxCanvas = this.canvas.getContext('2d');
-  this.height = 51;
-  this.width = 100;
+  this.height = 40;
+  this.width = 80;
   this.x = 100;
   this.y = (this.canvas.height / 2) - this.height / 2;
   this.lives = 1;
@@ -19,7 +19,7 @@ Player.prototype.move = function () {
     this.y = this.y + this.direction * this.velocity;
 }
 Player.prototype.draw = function () {
-  this.ctxCanvas.drawImage(this.img, this.x, this.y, this.width, this.height);
+  this.ctxCanvas.drawImage(this.img, this.x, this.y, 100, 51);
 }
 Player.prototype.setDirection = function (dir) {
 

@@ -16,7 +16,8 @@ function main(){
     <h2>Instructions</h2>
     <h4>Do you want to play this game? It's so easy!!!</h4>
     </header>
-    <article>
+    <article class="instructions-article">
+    <iframe src="https://giphy.com/embed/EXHHMS9caoxAA" width="480" height="322" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
       <p>The man just jump from elastic bed, and he want to make a mate, but... I think he can't do it...</p>
       <p>Anyway, you can help him with "Space" key.</p>
       <p>The man, dropdown by default. You must "give the power of fly" with "space" key if you don't want die with the floor... :)</p>
