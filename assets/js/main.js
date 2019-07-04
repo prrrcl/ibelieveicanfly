@@ -18,9 +18,9 @@ function main(){
     </header>
     <article class="instructions-article">
     <iframe src="https://giphy.com/embed/EXHHMS9caoxAA" width="480" height="322" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
-      <p>The man just jump from elastic bed, and he want to make a mate, but... I think he can't do it...</p>
-      <p>Anyway, you can help him with "Space" key.</p>
-      <p>The man, dropdown by default. You must "give the power of fly" with "space" key if you don't want die with the floor... :)</p>
+      <p>The man just jumped from the elastic bed, and he wants to make a dunk, but... I think he will not...</p>
+      <p>Anyway, you can help him by pressing the "Space" key.</p>
+      <p>The man will fall by default. You must "give him the power of flight" with the "space" key if you don't want him to die on the floor... :)</p>
       <button>Let's try</button>
     </article>
   </section>
