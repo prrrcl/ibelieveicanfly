@@ -8,13 +8,20 @@ function Obstacle(canvas, height, y){
   this.velocity = 3;
   this.direction = -1;
   this.color = 'red';
-  this.width = 20;
-  this.height = height;  
+  this.width = height/6.25;
+  this.height = height; 
+  this.img = new Image();
+  this.imgUp = new Image();
+  this.img.src = './assets/img/obstacle1.png';
+  this.imgUp.src = './assets/img/obstacle2.png';
 }
 Obstacle.prototype.move = function(){
   this.x = this.x + this.direction * this.velocity;
 }
 Obstacle.prototype.draw = function(){
-  this.ctxCanvas.fillStyle = this.color;
-  this.ctxCanvas.fillRect(this.x,this.y,this.width,this.height);
+  if(this.y === 0){
+    this.ctxCanvas.drawImage(this.imgUp, this.x, this.y, this.width, this.height);
+  }else{
+    this.ctxCanvas.drawImage(this.img, this.x, this.y, this.width, this.height);
+  }
 }

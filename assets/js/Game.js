@@ -13,6 +13,8 @@ function Game(canvas) {
 
 Game.prototype.start = function () {
   this.player = new Player(this.canvas);
+  this.background = new Background(this.canvas);
+
   var loop = () => {
     this.cont++;
     if (this.cont % 100 === 0) {
@@ -42,12 +44,14 @@ Game.prototype.update = function () {
   });
   this.player.checkScreen();
   this.player.move();
+  this.background.move();
 }
 Game.prototype.clear = function () {
   this.ctxCanvas.clearRect(0, 0, this.canvas.width, this.canvas.height)
 }
 
 Game.prototype.draw = function () {
+  this.background.draw();
   this.player.draw();
   this.obstacles.forEach(function (obstacle) {
     obstacle.draw();
@@ -79,7 +83,7 @@ Game.prototype.generateObstacles = function () {
     randomHeight = 400;
   }
   var newObstacle = new Obstacle(this.canvas, randomHeight, 0);
-  var newObstacle2 = new Obstacle(this.canvas, this.canvas.height, randomHeight + 80)
+  var newObstacle2 = new Obstacle(this.canvas, this.canvas.height, randomHeight + 200)
   this.obstacles.push(newObstacle, newObstacle2);
 }
 Game.prototype.deleteObstacles = function (obstacles) {
