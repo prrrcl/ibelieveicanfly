@@ -66,7 +66,8 @@ function main(){
     var scoreShow = document.querySelector('.score');
     document.addEventListener('keydown',function(event){
       if(event.keyCode === 13){
-        createGameScreen();
+        var but = document.querySelector('button');
+        but.click();
       }
     })
     scoreShow.innerHTML ='<h4>Great!!</h4> <p>your Score:</p> <h2>' + localStorage.getItem('score') + '</h2>';
