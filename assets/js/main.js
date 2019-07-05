@@ -17,8 +17,7 @@ function main(){
     <h4>Do you want to play this game? It's so easy!!!</h4>
     </header>
     <article class="instructions-article">
-    <iframe src="https://giphy.com/embed/EXHHMS9caoxAA" width="480" height="322" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
-      <p>The man just jumped from the elastic bed, and he wants to make a dunk, but... I think he will not...</p>
+<img class="instructions-img" src="assets/img/meme.gif">      <p>The man just jumped from the elastic bed, and he wants to make a dunk, but... I think he will not...</p>
       <p>Anyway, you can help him by pressing the "Space" key.</p>
       <p>The man will fall by default. You must "give him the power of flight" with the "space" key if you don't want him to die on the floor... :)</p>
       <button>Let's try</button>
@@ -41,6 +40,7 @@ function main(){
     game.gameOverCallback(createGameOverScreen);
 
     game.start();
+    
     document.addEventListener('keydown', function(event){
        if(event.keyCode === 32){
         game.player.setDirection(-1);
@@ -60,9 +60,15 @@ function main(){
         <p class="score"></p>
 
         <button>Restart</button>
+        <p>Click on button o press Enter to restart game!</p>
       </section>
     `);
     var scoreShow = document.querySelector('.score');
+    document.addEventListener('keydown',function(event){
+      if(event.keyCode === 13){
+        createGameScreen();
+      }
+    })
     scoreShow.innerHTML ='<h4>Great!!</h4> <p>your Score:</p> <h2>' + localStorage.getItem('score') + '</h2>';
     var restartButton = gameOverScreen.querySelector('button');
     restartButton.addEventListener('click', createGameScreen);

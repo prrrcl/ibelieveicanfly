@@ -164,6 +164,7 @@ button {
   border-bottom-color: rgb(1, 138, 105);
   cursor: pointer;
   color:white;
+  margin: 15px 0;
 }
 button:hover{
   border-bottom-width: .0625rem;
@@ -179,4 +180,8 @@ button:hover{
   margin:5px 0;
   max-width: 80%;
   word-wrap: break-word;
+}
+.instructions-img{
+  margin: 15px 0;
+  width: 500px;
 }

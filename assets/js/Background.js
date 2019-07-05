@@ -10,14 +10,13 @@ function Background(canvas){
   this.velocity = 1;
   this.direction = -1;
   this.img = new Image();
-  this.img.src = './assets/img/back.png';
+  this.img.src = './assets/img/back.gif';
 }
 
 Background.prototype.move = function(){
   if(this.x === -1400){
     this.x = 0;
   }else{
-    console.log('entra')
     this.x = this.x + this.velocity * this.direction;
   }
 }

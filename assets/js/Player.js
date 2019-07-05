@@ -6,7 +6,7 @@ function Player(canvas) {
   this.height = 40;
   this.width = 80;
   this.x = 100;
-  this.y = (this.canvas.height / 2) - this.height / 2;
+  this.y = 0;
   this.lives = 1;
   this.velocity = 4;
   this.direction = 1;
