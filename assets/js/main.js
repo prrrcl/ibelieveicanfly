@@ -20,15 +20,30 @@ function main(){
 <img class="instructions-img" src="assets/img/meme.gif">      <p>The man just jumped from the elastic bed, and he wants to make a dunk, but... I think he will not...</p>
       <p>Anyway, you can help him by pressing the "Space" key.</p>
       <p>The man will fall by default. You must "give him the power of flight" with the "space" key if you don't want him to die on the floor... :)</p>
-      <button>Let's try</button>
+      
+    </article>
+    <article class="form">
+    <input placeholder="Your name..." id="player-name" name="player-name"/>
+    <button>Let's try</button>
     </article>
   </section>
     `);
     var startButton = startScreen.querySelector('button');
-    startButton.addEventListener('click', createGameScreen);
+    var localStoragedInitial = localStorage.getItem('Scores');
+    if(localStoragedInitial === null){
+      localStorage.setItem('Scores', JSON.stringify([]));
+    }
+    startButton.addEventListener('click', submitName);
   };
-
-  function createGameScreen(){
+  function submitName(){
+    var input = document.querySelector('input').value;
+    // localStorage.setItem('Scores', JSON.stringify([{name: input, score: 0}]));
+    var arr = JSON.parse(localStorage.getItem('Scores'));
+    arr.push({name: input, score: 0});
+    localStorage.setItem('Scores',JSON.stringify(arr));
+    createGameScreen();
+  }
+  function createGameScreen(name){
     var gameScreen = buildDom(`
       <section>
         <canvas id="game-canvas" width="700" height="500"></canvas>
@@ -36,7 +51,7 @@ function main(){
       </section>
     `);
     var canvas = gameScreen.querySelector('#game-canvas');
-    var game = new Game(canvas);
+    var game = new Game(canvas, name);
     game.gameOverCallback(createGameOverScreen);
 
     game.start();
@@ -61,8 +76,24 @@ function main(){
 
         <button>Restart</button>
         <p>Click on button o press Enter to restart game!</p>
+
+        <h3 class="mt-5">Top 5</h3>
+        <ol class="highscores">
+          
+        </ol>
       </section>
     `);
+    var scores = JSON.parse(localStorage.getItem('Scores'));
+    if(scores.length > 1){
+      scores[scores.length-1].score = localStorage.getItem('score');
+    }else if(scores.length === 1){
+      scores[0].score = localStorage.getItem('score');
+    }
+    localStorage.setItem('Scores', JSON.stringify(scores));
+
+
+    printScores();
+    
     var scoreShow = document.querySelector('.score');
     document.addEventListener('keydown',function(event){
       if(event.keyCode === 13){
@@ -72,9 +103,27 @@ function main(){
     })
     scoreShow.innerHTML ='<h4>Great!!</h4> <p>your Score:</p> <h2>' + localStorage.getItem('score') + '</h2>';
     var restartButton = gameOverScreen.querySelector('button');
-    restartButton.addEventListener('click', createGameScreen);
+    restartButton.addEventListener('click', createStartPage);
   }
-
+function printScores(){
+  var arrScores = JSON.parse(localStorage.getItem('Scores'));
+  var ul = document.querySelector('.highscores');
+ 
+  if(arrScores === null){
+    var noScores = ul.appendChild(li);
+    noScores.innerHTML = '<h4>Nadie ha jugado todavía!</h4>'
+  }else{
+    arrScores.sort(function(a,b){
+      return b.score - a.score;
+    })
+    console.log(arrScores)
+    for(var i = 0; i < 5; i++){
+      var li = document.createElement('li');
+      li.appendChild(document.createTextNode(`${arrScores[i].name}: ${arrScores[i].score}`))
+      ul.appendChild(li)
+    }
+  }
+}
   createStartPage();
 
 }

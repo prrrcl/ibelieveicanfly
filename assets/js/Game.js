@@ -14,7 +14,7 @@ function Game(canvas) {
 
 Game.prototype.start = function () {
   this.bso.play();
-  this.player = new Player(this.canvas);
+  this.player = new Player(this.canvas, this.name, this.score);
   this.background = new Background(this.canvas);
 
   var loop = () => {
@@ -29,9 +29,6 @@ Game.prototype.start = function () {
     this.update();
     this.clear();
     this.draw();
-    this.checkCollisions();
-    this.scoreUpdate();
-    this.saveScore(this.score);
     if (!this.isGameOver) {
       var frameID = requestAnimationFrame(loop);
     } else {
@@ -41,6 +38,9 @@ Game.prototype.start = function () {
   loop();
 }
 Game.prototype.update = function () {
+  this.checkCollisions();
+  this.scoreUpdate();
+  this.saveScore(this.score);
   this.obstacles.forEach(function (obstacle) {
     obstacle.move();
   });

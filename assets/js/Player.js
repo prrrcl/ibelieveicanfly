@@ -1,9 +1,11 @@
 'use strict';
 
-function Player(canvas) {
+function Player(canvas, name, score ) {
   this.canvas = canvas;
   this.ctxCanvas = this.canvas.getContext('2d');
   this.height = 40;
+  this.name = '';
+  this.score = 0;
   this.width = 80;
   this.x = 100;
   this.y = 0;
