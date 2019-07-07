@@ -1,15 +1,15 @@
 'use strict';
 
-function main(){
+function main() {
 
   var gameParent = document.querySelector('#game');
 
-  function buildDom(html){
+  function buildDom(html) {
     gameParent.innerHTML = html;
     return gameParent;
   }
 
-  function createStartPage(){
+  function createStartPage() {
     var startScreen = buildDom(`
     <section>
     <header>
@@ -30,20 +30,20 @@ function main(){
     `);
     var startButton = startScreen.querySelector('button');
     var localStoragedInitial = localStorage.getItem('Scores');
-    if(localStoragedInitial === null){
+    if (localStoragedInitial === null) {
       localStorage.setItem('Scores', JSON.stringify([]));
     }
     startButton.addEventListener('click', submitName);
   };
-  function submitName(){
+  function submitName() {
     var input = document.querySelector('input').value;
     // localStorage.setItem('Scores', JSON.stringify([{name: input, score: 0}]));
     var arr = JSON.parse(localStorage.getItem('Scores'));
-    arr.push({name: input, score: 0});
-    localStorage.setItem('Scores',JSON.stringify(arr));
+    arr.push({ name: input, score: 0 });
+    localStorage.setItem('Scores', JSON.stringify(arr));
     createGameScreen();
   }
-  function createGameScreen(name){
+  function createGameScreen(name) {
     var gameScreen = buildDom(`
       <section>
         <canvas id="game-canvas" width="700" height="500"></canvas>
@@ -55,20 +55,20 @@ function main(){
     game.gameOverCallback(createGameOverScreen);
 
     game.start();
-    
-    document.addEventListener('keydown', function(event){
-       if(event.keyCode === 32){
+
+    document.addEventListener('keydown', function (event) {
+      if (event.keyCode === 32) {
         game.player.setDirection(-1);
       }
-      document.addEventListener('keyup', function(event){
-        if(event.keyCode === 32){
+      document.addEventListener('keyup', function (event) {
+        if (event.keyCode === 32) {
           game.player.setDirection(1);
         }
       })
     });
   }
 
-  function createGameOverScreen(){
+  function createGameOverScreen() {
     var gameOverScreen = buildDom(`
       <section>
         <h2>GAME OVER </h2>
@@ -84,47 +84,51 @@ function main(){
       </section>
     `);
     var scores = JSON.parse(localStorage.getItem('Scores'));
-    if(scores.length > 1){
-      scores[scores.length-1].score = localStorage.getItem('score');
-    }else if(scores.length === 1){
+    if (scores.length > 1) {
+      scores[scores.length - 1].score = localStorage.getItem('score');
+    } else if (scores.length === 1) {
       scores[0].score = localStorage.getItem('score');
     }
     localStorage.setItem('Scores', JSON.stringify(scores));
 
 
     printScores();
-    
+
     var scoreShow = document.querySelector('.score');
-    document.addEventListener('keydown',function(event){
-      if(event.keyCode === 13){
+    document.addEventListener('keydown', function (event) {
+      if (event.keyCode === 13) {
         var but = document.querySelector('button');
         but.click();
       }
     })
-    scoreShow.innerHTML ='<h4>Great!!</h4> <p>your Score:</p> <h2>' + localStorage.getItem('score') + '</h2>';
+    scoreShow.innerHTML = '<h4>Great!!</h4> <p>your Score:</p> <h2>' + localStorage.getItem('score') + '</h2>';
     var restartButton = gameOverScreen.querySelector('button');
     restartButton.addEventListener('click', createStartPage);
   }
-function printScores(){
-  var arrScores = JSON.parse(localStorage.getItem('Scores'));
-  var ul = document.querySelector('.highscores');
- 
-  if(arrScores === null){
-    var noScores = ul.appendChild(li);
-    noScores.innerHTML = '<h4>Nadie ha jugado todavía!</h4>'
-  }else{
-    arrScores.sort(function(a,b){
-      return b.score - a.score;
-    })
-    console.log(arrScores)
-    for(var i = 0; i < 5; i++){
-      var li = document.createElement('li');
-      li.appendChild(document.createTextNode(`${arrScores[i].name}: ${arrScores[i].score}`))
-      ul.appendChild(li)
+  function printScores() {
+    var arrScores = JSON.parse(localStorage.getItem('Scores'));
+    var ul = document.querySelector('.highscores');
+
+    if (arrScores === null) {
+      var noScores = ul.appendChild(li);
+      noScores.innerHTML = '<h4>Nadie ha jugado todavía!</h4>'
+    } else {
+      arrScores.sort(function (a, b) {
+        return b.score - a.score;
+      });
+      
+      for (var i = 0; i < 5; i++) {
+        var li = document.createElement('li');
+        li.appendChild(document.createTextNode(`${arrScores[i].name}: ${arrScores[i].score}`))
+        ul.appendChild(li)
+      }
+
     }
-  }
-}
+      
+      
+    }
+  
   createStartPage();
 
 }
-window.addEventListener('load',main);
+window.addEventListener('load', main);
